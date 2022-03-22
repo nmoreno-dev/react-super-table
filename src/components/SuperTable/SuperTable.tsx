@@ -1,15 +1,18 @@
 import React from 'react';
-import {ISuperTableProps} from './SuperTable.types';
-import {useSuperTable} from './useSuperTable';
+import {ISuperTableProps} from '../../types/SuperTable.types';
+import {useSuperTable} from '../../customHooks/useSuperTable';
+import {Pagination} from '../Pagination/Pagination';
 
 export const SuperTable = (props: ISuperTableProps) => {
-  const {data, columns} = props;
+  const {data = [], columns} = props;
   const defaultTextAlign = props.textAlign || 'left';
   const {
+    pages,
     currentRows = [],
     normalizedColumns,
     handleRowsAmmountToShow,
     handleSort,
+    handlePagination,
   } = useSuperTable(data, columns, props.defaultSortMethod);
   console.log('SuperTable Render');
 
@@ -57,7 +60,16 @@ export const SuperTable = (props: ISuperTableProps) => {
           </tbody>
           {/* <tfoot></tfoot> */}
         </table>
-        <div>{currentRows.length <= 0 && <p>There's no data to show</p>}</div>
+        <div className="bottom-controls">
+          {currentRows.length <= 0 && <p>There's no data to show</p>}
+          {props.pagination && (
+            <Pagination
+              pages={pages}
+              setCurrentPage={handlePagination}
+              controlOption={props.paginationOption}
+            />
+          )}
+        </div>
       </div>
     </>
   );

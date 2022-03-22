@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
 import {SuperTable} from '../components/SuperTable';
-import {ISuperTableProps} from '../components/SuperTable/SuperTable.types';
+import {ISuperTableProps} from '../types/SuperTable.types';
 import {heavyData} from './TestData/heavyData';
 import {simpleData} from './TestData/simpleData';
 
@@ -30,4 +30,5 @@ export const Pagination = Template.bind({});
 Pagination.args = {
   columns: heavyData.columns,
   data: heavyData.data,
+  pagination: true,
 };

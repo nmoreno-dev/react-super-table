@@ -1,4 +1,4 @@
-import {ColumnType, RowType} from '../../components/SuperTable/SuperTable.types';
+import {ColumnType, RowType} from '../../types/SuperTable.types';
 
 export const heavyData: {columns: ColumnType[]; data: RowType[]} = {
   columns: [

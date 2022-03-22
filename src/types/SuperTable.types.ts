@@ -1,3 +1,5 @@
+import {PaginationOptions} from './Paginations.types';
+
 type RowPropsType = number | string | JSX.Element;
 export type RowType = {[key: string]: RowPropsType};
 
@@ -29,5 +31,6 @@ export interface ISuperTableProps {
   defaultSortMethod?: (selector: ColumnSelectorType) => RowType[];
   exportable?: boolean;
   pagination?: boolean;
+  paginationOption?: PaginationOptions;
   searcher?: boolean;
 }

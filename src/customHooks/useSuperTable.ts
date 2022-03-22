@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
-import {ColumnType, ISuperTableProps, RowType} from './SuperTable.types';
+import {ColumnType, ISuperTableProps, RowType} from '../types/SuperTable.types';
 import chunk from 'lodash.chunk';
 import {v4 as uuidv4} from 'uuid';
 import cloneDeep from 'lodash.clonedeep';
@@ -17,8 +17,9 @@ export const useSuperTable = (
   const [currentRows, setRows] = useState<ISuperTableProps['data']>([]);
   const [normalizedColumns, setNormalizedColums] = useState<NormalizedColumnType[]>([]);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const pages = useRef<RowType[][]>(chunk(data, 10));
+  const [pages, setPages] = useState<RowType[][]>(chunk(data, 10));
   const columnBeingSortedID = useRef<string>('');
+
   const stringComparator = useCallback(Intl.Collator('es').compare, []);
 
   const normalizeColumns = (): NormalizedColumnType[] => {
@@ -45,22 +46,19 @@ export const useSuperTable = (
     });
 
   const reversePageRows = () => {
-    pages.current = pages.current.map(page => [...page].reverse()).reverse();
-    setRows(pages.current[0]);
+    setPages(pages.map(page => [...page].reverse()).reverse());
+    setRows(pages[0]);
   };
 
   const updatePages = (updateData: RowType[]) => {
-    pages.current = chunk(updateData, rowsPerPage);
-    setRows(pages.current[0]);
+    setPages(chunk(updateData, rowsPerPage));
   };
 
   const handleRowsAmmountToShow = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value: number = parseInt(event.target.value);
 
     if (Number.isNaN(rowsPerPage)) {
-      console.error(
-        'A data type that was obtained from the rows per page selector is not a number'
-      );
+      console.error('The data that was obtained from the rows per page selector is not a number');
       return;
     }
     setRowsPerPage(value);
@@ -77,23 +75,34 @@ export const useSuperTable = (
     const newData: RowType[] = customSortMethod
       ? customSortMethod(cloneDeep(data), selector)
       : defaultSort(selector);
+
     updatePages(newData);
   };
 
+  const handlePagination = (pageIndex: number) => {
+    setRows(pages[pageIndex]);
+  };
+
   useEffect(() => {
-    updatePages(flatten(pages.current));
+    updatePages(flatten(pages));
   }, [rowsPerPage]);
 
   useEffect(() => {
+    setRows(pages[0]);
+  }, [pages]);
+
+  useEffect(() => {
     setNormalizedColums(normalizeColumns());
-    setRows(pages.current[0]);
+    setRows(pages[0]);
   }, []);
 
   return {
+    pages: pages,
     currentRows,
     normalizedColumns,
     rowsPerPage,
     handleRowsAmmountToShow,
     handleSort,
+    handlePagination,
   };
 };
