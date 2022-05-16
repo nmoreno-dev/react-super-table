@@ -1,6 +1,7 @@
-import {ColumnType, RowType} from '../../types/SuperTable.types';
+import {Column} from '../../types/SuperTable.types';
+import {Row} from './types';
 
-export const simpleData: {columns: ColumnType[]; data: RowType[]} = {
+export const simpleData: {columns: Column<Row>[]; data: Row[]} = {
   columns: [
     {
       _index: 0,

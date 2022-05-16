@@ -1,36 +1,62 @@
 import {PaginationOptions} from './Paginations.types';
 
-type RowPropsType = number | string | JSX.Element;
-export type RowType = {[key: string]: RowPropsType};
-
-export type ColumnSelectorType = (row: RowType) => RowPropsType;
-export type CustomSortMethodType = (data: RowType[], selector: ColumnSelectorType) => RowType[];
-
-type ColumnCommonProps = {
+type ColumnCommon<T extends Record<string, any>> = {
   _index: number;
+  textAling?: 'left' | 'right' | 'center';
   title: string;
-  textAlign?: 'right' | 'left';
-  selector: ColumnSelectorType;
+  selector: (row: T) => keyof T;
+  sortCriteria?: (row: T) => any;
+  searchCriteria?: (row: T) => any;
 };
-type ColumnTruncateType =
+
+type ColumnTruncate<T extends Object> =
   | {
       sortable?: false;
-      customSortMethod?: never;
+      sortMethod?: never;
     }
   | {
       sortable: true;
-      customSortMethod?: CustomSortMethodType;
+      sortMethod?: (data: T[], selector: (row: T) => keyof T) => T[];
     };
-export type ColumnType = ColumnCommonProps & ColumnTruncateType;
 
-export interface ISuperTableProps {
-  columns: ColumnType[];
-  data: RowType[];
+export type Column<T extends Object> = ColumnCommon<T> & ColumnTruncate<T>;
+
+export type NormalizedColumn<T extends Object> = Column<T> & {
+  _id: string;
+  ascendingOrder: boolean;
+};
+
+type SuperTablePaginationTruncate =
+  | {
+      pagination?: false;
+      paginationOption?: never;
+    }
+  | {
+      pagination: true;
+      paginationOption?: PaginationOptions;
+    };
+
+type SuperTableSearchTruncate<T extends object> =
+  | {
+      searcher?: false;
+      searchMethod?: never;
+    }
+  | {
+      pagination: true;
+      searchMethod?: (searchValue: string, data: T[], columns: NormalizedColumn<T>[]) => T[];
+    };
+
+type SuperTableCommon<T extends Object> = {
+  columns: Column<T>[];
+  rows: T[];
   title?: string;
-  textAlign?: 'right' | 'left';
-  defaultSortMethod?: (selector: ColumnSelectorType) => RowType[];
+  textAling?: 'left' | 'right' | 'center';
+  defaultSortMethod?: (data: T[], selector: (row: T) => keyof T) => T[];
+  defaultSearchMethod?: (searchValue: string, data: T[], columns: NormalizedColumn<T>[]) => T[];
   exportable?: boolean;
-  pagination?: boolean;
-  paginationOption?: PaginationOptions;
   searcher?: boolean;
-}
+};
+
+export type SuperTableProps<T extends object> = SuperTableCommon<T> &
+  SuperTablePaginationTruncate &
+  SuperTableSearchTruncate<T>;

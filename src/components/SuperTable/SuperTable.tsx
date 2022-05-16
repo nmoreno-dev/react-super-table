@@ -1,42 +1,51 @@
 import React from 'react';
-import {ISuperTableProps} from '../../types/SuperTable.types';
-import {useSuperTable} from '../../customHooks/useSuperTable';
+import {useSuperTable} from '../../hooks/useSuperTable';
+import {PaginationOptionsEnum} from '../../types/Paginations.types';
+import {SuperTableProps} from '../../types/SuperTable.types';
 import {Pagination} from '../Pagination/Pagination';
 
-export const SuperTable = (props: ISuperTableProps) => {
-  const {data = [], columns} = props;
-  const defaultTextAlign = props.textAlign || 'left';
+export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
+  const {rows = [], columns} = props;
+  const defaultTextAlign = props.textAling || 'left';
+
   const {
     pages,
     currentRows = [],
     normalizedColumns,
+    rowsAmount,
     handleRowsAmmountToShow,
     handleSort,
+    handleSearchInputChange,
     handlePagination,
-  } = useSuperTable(data, columns, props.defaultSortMethod);
+  } = useSuperTable<T>(rows, columns, props.defaultSortMethod, props.defaultSearchMethod);
   console.log('SuperTable Render');
 
   return (
     <>
-      <div>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        {props.title && <h1>{props.title}</h1>}
         <span>
           Showing{' '}
           <select name="rowsPerPage" id="rowsPerPage" onChange={handleRowsAmmountToShow}>
-            {data.length >= 10 && <option value={10}>10</option>}
-            {data.length >= 25 && <option value={25}>25</option>}
-            {data.length >= 50 && <option value={50}>50</option>}
-            {data.length >= 100 && <option value={100}>100</option>}
-            <option value={data.length}>All</option>
+            {rowsAmount >= 10 && <option value={10}>10</option>}
+            {rowsAmount >= 25 && <option value={25}>25</option>}
+            {rowsAmount >= 50 && <option value={50}>50</option>}
+            {rowsAmount >= 100 && <option value={100}>100</option>}
+            <option value={rows.length}>All</option>
           </select>{' '}
-          of {data.length} entries.
+          of {rowsAmount} entries.
         </span>
-        {props.title && <h1>{props.title}</h1>}
+        {props.searcher && (
+          <span>
+            Search: <input placeholder="Start typing here..." onChange={handleSearchInputChange} />
+          </span>
+        )}
       </div>
       <div>
         <table width="100%">
           <thead>
             <tr>
-              {normalizedColumns.map((column, columnIndex) => (
+              {normalizedColumns.map((column: any, columnIndex: any) => (
                 <th
                   key={columnIndex}
                   align={column.textAlign || defaultTextAlign}
@@ -50,7 +59,7 @@ export const SuperTable = (props: ISuperTableProps) => {
           <tbody>
             {currentRows.map((row, rowIndex) => (
               <tr key={rowIndex}>
-                {normalizedColumns.map((column, columnIndex) => (
+                {normalizedColumns.map((column: any, columnIndex: any) => (
                   <td key={columnIndex} align={column.textAlign || defaultTextAlign}>
                     {column.selector(row)}
                   </td>
@@ -64,9 +73,9 @@ export const SuperTable = (props: ISuperTableProps) => {
           {currentRows.length <= 0 && <p>There's no data to show</p>}
           {props.pagination && (
             <Pagination
+              controlOption={props.paginationOption || PaginationOptionsEnum.simple}
               pages={pages}
               setCurrentPage={handlePagination}
-              controlOption={props.paginationOption}
             />
           )}
         </div>

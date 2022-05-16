@@ -1,9 +1,7 @@
-import {RowType} from './SuperTable.types';
-
-export type PaginationProps = {
-  pages: RowType[][];
+export type PaginationProps<T extends object> = {
+  pages: T[];
   setCurrentPage: (pageIndex: number) => void;
-  controlOption?: PaginationOptions;
+  controlOption: PaginationOptions;
 };
 
 export enum PaginationOptionsEnum {

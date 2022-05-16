@@ -1,12 +1,12 @@
 import {useEffect, useRef, useState} from 'react';
 import {PaginationProps} from '../types/Paginations.types';
 
-export const usePagination = (
-  pages: PaginationProps['pages'],
-  setCurrentPage: PaginationProps['setCurrentPage']
+export const usePagination = <T extends object>(
+  pages: PaginationProps<T>['pages'],
+  setCurrentPage: PaginationProps<T>['setCurrentPage']
 ) => {
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
-  const pagesIndices = useRef<number[]>(Array.from(Array(pages.length).keys()));
+  const pagesIndices = useRef(Array.from(Array(pages.length).keys()));
   const [navegableIndices, setNavegableIndices] = useState<number[]>([]);
   const canGoPrevious = useRef<boolean>(false);
   const canGoNext = useRef<boolean>(false);
@@ -35,7 +35,7 @@ export const usePagination = (
     setCurrentPageIndex(pages.length - 1);
   };
 
-  const culateNavegableIndices = () => {
+  const calculateNavegableIndices = () => {
     const subarr = [];
     for (let i = -2; i <= 2; i++) {
       const idx = currentPageIndex + i;
@@ -47,21 +47,19 @@ export const usePagination = (
   };
 
   useEffect(() => {
-    canGoPrevious.current = currentPageIndex > 0;
-    canGoNext.current = currentPageIndex < pages.length - 1;
     setCurrentPage(currentPageIndex);
-    culateNavegableIndices();
+    calculateNavegableIndices();
   }, [currentPageIndex]);
 
   useEffect(() => {
-    canGoPrevious.current = currentPageIndex > 0;
-    canGoNext.current = currentPageIndex < pages.length - 1;
     setCurrentPageIndex(0);
+    calculateNavegableIndices();
   }, [pages]);
 
   useEffect(() => {
-    culateNavegableIndices();
-  }, []);
+    canGoPrevious.current = currentPageIndex > 0;
+    canGoNext.current = currentPageIndex < pages.length - 1;
+  }, [pages, currentPageIndex]);
 
   return {
     pagesIndices: pagesIndices.current,

@@ -1,15 +1,15 @@
 import React from 'react';
-import {usePagination} from '../../customHooks/usePagination';
+import {usePagination} from '../../hooks/usePagination';
 import {PaginationOptionsEnum, PaginationProps} from '../../types/Paginations.types';
 import {FirstLastButtons} from '../FirstLastButtons/FirstLastButtons';
 import {NumberButtons} from '../NumbersButtons/NumberButtons';
 import {PreviousNextButtons} from '../PreviousNext/PreviousNextButtons';
 
-export const Pagination = ({
+export const Pagination = <T extends object>({
   pages,
   setCurrentPage,
   controlOption = PaginationOptionsEnum.full,
-}: PaginationProps) => {
+}: PaginationProps<T>) => {
   const {
     pagesIndices,
     currentPageIndex,
