@@ -6,4 +6,5 @@ export type Row = {
   lastName: string;
   email: string;
   phone: string;
+  superName?: string;
 };

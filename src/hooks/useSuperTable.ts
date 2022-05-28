@@ -47,10 +47,14 @@ export const useSuperTable = <T extends object>(
       data.filter(row =>
         searchValue
           ? columns.some(column => {
+              if (column.searchCriteria) console.log(column.searchCriteria);
+
               const getValueToCompare = column.searchCriteria || column.selector;
               return (
-                getValueToCompare(row).toString().toLowerCase().indexOf(searchValue.toLowerCase()) >
-                -1
+                getValueToCompare(row)
+                  ?.toString()
+                  .toLowerCase()
+                  .indexOf(searchValue.toLowerCase()) > -1
               );
             })
           : true
