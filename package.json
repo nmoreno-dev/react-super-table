@@ -1,14 +1,29 @@
 {
   "name": "react-super-table",
+  "description": "A react super table component that handle sorting, pagination and searching",
   "version": "0.1.0",
-  "description": "A react super table component",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nahuel1705/react-super-table"
+  },
   "scripts": {
     "rollup": "rollup -c",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "component",
+    "ui",
+    "react table",
+    "table",
+    "data-table",
+    "sorting",
+    "pagination",
+    "searching"
+  ],
   "author": "Nahuel1705",
   "license": "ISC",
   "devDependencies": {
@@ -40,6 +55,7 @@
     "jest": "^27.5.1",
     "rollup": "^2.70.1",
     "rollup-plugin-dts": "^4.2.0",
+    "rollup-plugin-ignore": "^1.0.10",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
