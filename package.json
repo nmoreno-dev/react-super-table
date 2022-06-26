@@ -1,11 +1,13 @@
 {
-  "name": "react-super-table",
+  "name": "@nahuel1705/react-super-table",
   "description": "A react super table component that handle sorting, pagination and searching",
   "version": "0.1.0",
-  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nahuel1705/react-super-table"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/Nahuel1705"
   },
   "scripts": {
     "rollup": "rollup -c",
