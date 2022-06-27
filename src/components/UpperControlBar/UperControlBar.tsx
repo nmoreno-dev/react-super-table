@@ -1,5 +1,5 @@
 import React from "react"
-import { UpperControlBarContainer } from "./UpperControlBar.elements"
+import { ControlBarContainer, PagesAndSearchControlBarContainer } from "./UpperControlBar.elements"
 
 type UpperControlBarProps = {
     title?: string,
@@ -21,8 +21,9 @@ export const UpperControlBar = (props: UpperControlBarProps) => {
     } = props
 
     return(
-        <UpperControlBarContainer>
+        <ControlBarContainer>
         {title && <h1>{title}</h1>}
+            <PagesAndSearchControlBarContainer>
         <span>
         Showing{' '}
         <select name="rowsPerPage" id="rowsPerPage" onChange={handleRowsAmmountToShow}>
@@ -39,6 +40,7 @@ export const UpperControlBar = (props: UpperControlBarProps) => {
             Search: <input placeholder="Start typing here..." onChange={handleSearchInputChange} />
         </span>
         )}
-    </UpperControlBarContainer>
+    </PagesAndSearchControlBarContainer>
+        </ControlBarContainer>
   )
 }
