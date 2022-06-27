@@ -13,7 +13,7 @@ export const NumberButtons = ({
         return (
           <Button
             label={(number + 1).toString()}
-            onclick={() => onNumberClick(number)}
+            onClick={() => onNumberClick(number)}
             key={index}
           />
         );
