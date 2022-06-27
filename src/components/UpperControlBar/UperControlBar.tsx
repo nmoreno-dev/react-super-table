@@ -22,7 +22,7 @@ export const UpperControlBar = (props: UpperControlBarProps) => {
 
     return(
         <ControlBarContainer>
-        {title && <h1>{title}</h1>}
+        {title && <h3>{title}</h3>}
             <PagesAndSearchControlBarContainer>
         <span>
         Showing{' '}
