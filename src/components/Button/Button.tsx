@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { ButtonProps } from "../../types/Button.types";
+import { StyledButton } from "./Button.elements";
 
 export const Button = ({
   label,
@@ -9,7 +10,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <button
+    <StyledButton
       onClick={props.onClick}
       className="site-button"
       disabled={props.disabled}
@@ -17,6 +18,6 @@ export const Button = ({
       {label}
       {separator && <span className="separator"></span>}
       {icon}
-    </button>
+    </StyledButton>
   );
 };
