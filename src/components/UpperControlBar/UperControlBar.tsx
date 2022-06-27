@@ -1,12 +1,13 @@
 import React from "react"
+import { UpperControlBarContainer } from "./UpperControlBar.elements"
 
 type UpperControlBarProps = {
-    title: string,
+    title?: string,
     rowsAmount: number,
     rowLength: number,
-    showSearcher: boolean,
-    handleRowsAmmountToShow: () => {},
-    handleSearchInputChange: () => {}
+    showSearcher?: boolean,
+    handleRowsAmmountToShow: (event: React.ChangeEvent<HTMLSelectElement>) => void,
+    handleSearchInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 export const UpperControlBar = (props: UpperControlBarProps) => {
 
@@ -18,8 +19,9 @@ export const UpperControlBar = (props: UpperControlBarProps) => {
         handleRowsAmmountToShow,
         handleSearchInputChange
     } = props
+
     return(
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <UpperControlBarContainer>
         {title && <h1>{title}</h1>}
         <span>
         Showing{' '}
@@ -37,6 +39,6 @@ export const UpperControlBar = (props: UpperControlBarProps) => {
             Search: <input placeholder="Start typing here..." onChange={handleSearchInputChange} />
         </span>
         )}
-    </div>
+    </UpperControlBarContainer>
   )
 }
