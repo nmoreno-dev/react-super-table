@@ -12,20 +12,8 @@ export const Button = ({
   disabled,
   style,
 }: ButtonProps) => {
-  const buttonStyle = {
-    fontSize: fontSize || "1rem",
-    margin: margin || "5px",
-    borderRadius: (circle && "50%") || undefined,
-    ...style,
-  };
-
   return (
-    <button
-      onClick={onclick}
-      className="site-button"
-      style={buttonStyle}
-      disabled={disabled}
-    >
+    <button onClick={onclick} className="site-button" disabled={disabled}>
       {label}
       {separator && <span className="separator"></span>}
       {icon}
