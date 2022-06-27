@@ -3,6 +3,7 @@ import {useSuperTable} from '../../hooks/useSuperTable';
 import {PaginationOptionsEnum} from '../../types/Paginations.types';
 import {SuperTableProps} from '../../types/SuperTable.types';
 import {Pagination} from '../Pagination/Pagination';
+import { UpperControlBar } from '../UpperControlBar/UperControlBar';
 
 export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
   const {rows = [], columns} = props;
@@ -22,25 +23,14 @@ export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
 
   return (
     <>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        {props.title && <h1>{props.title}</h1>}
-        <span>
-          Showing{' '}
-          <select name="rowsPerPage" id="rowsPerPage" onChange={handleRowsAmmountToShow}>
-            {rowsAmount >= 10 && <option value={10}>10</option>}
-            {rowsAmount >= 25 && <option value={25}>25</option>}
-            {rowsAmount >= 50 && <option value={50}>50</option>}
-            {rowsAmount >= 100 && <option value={100}>100</option>}
-            <option value={rows.length}>All</option>
-          </select>{' '}
-          of {rowsAmount} entries.
-        </span>
-        {props.searcher && (
-          <span>
-            Search: <input placeholder="Start typing here..." onChange={handleSearchInputChange} />
-          </span>
-        )}
-      </div>
+      <UpperControlBar
+        title={props.title}
+        rowsAmount={rowsAmount}
+        rowLength={rows.length}
+        showSearcher={props.searcher}
+        handleRowsAmmountToShow={handleRowsAmmountToShow}
+        handleSearchInputChange={handleSearchInputChange}
+      />
       <div>
         <table width="100%">
           <thead>
