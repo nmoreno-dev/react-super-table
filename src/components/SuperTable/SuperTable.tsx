@@ -4,6 +4,7 @@ import {PaginationOptionsEnum} from '../../types/Paginations.types';
 import {SuperTableProps} from '../../types/SuperTable.types';
 import {Pagination} from '../Pagination/Pagination';
 import { UpperControlBar } from '../UpperControlBar/UperControlBar';
+import { Table, Headers, Header, Row} from './SuperTable.elements';
 
 export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
   const {rows = [], columns} = props;
@@ -32,20 +33,20 @@ export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
         handleSearchInputChange={handleSearchInputChange}
       />
       <div>
-        <table width="100%">
-          <thead>
-            <tr>
+        <Table>
+          <Headers>
+            <Row>
               {normalizedColumns.map((column: any, columnIndex: any) => (
-                <th
+                <Header
                   key={columnIndex}
                   align={column.textAlign || defaultTextAlign}
                   onClick={() => handleSort(column)}
                 >
                   {column.title}
-                </th>
+                </Header>
               ))}
-            </tr>
-          </thead>
+            </Row>
+          </Headers>
           <tbody>
             {currentRows.map((row, rowIndex) => (
               <tr key={rowIndex}>
@@ -58,7 +59,7 @@ export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
             ))}
           </tbody>
           {/* <tfoot></tfoot> */}
-        </table>
+        </Table>
         <div className="bottom-controls">
           {currentRows.length <= 0 && <p>There's no data to show</p>}
           {props.pagination && (
