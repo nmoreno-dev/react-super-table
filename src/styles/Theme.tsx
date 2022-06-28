@@ -1,5 +1,25 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, ThemeProviderComponent } from "styled-components";
+
+type ThemeType = {
+  colors: {
+    primary?: string;
+    tableBanner?: string;
+    inPrimaryText?: string;
+    pagesNavButton?: string;
+    pagesNumberButton?: string;
+    pagesCurrentNumberButton?: string;
+    tableHeadersBackground?: string;
+    tableHeadersText?: string;
+    tableCellBackground?: string;
+    tableCellText?: string;
+  };
+};
+
+interface CustomThemeProviderProps {
+  children?: React.ReactNode;
+  theme?: ThemeType;
+}
 
 const theme = {
   colors: {
@@ -16,8 +36,10 @@ const theme = {
   },
 };
 
-const Theme: React.FC = ({ children }) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+const CustomThemeProvider = (props: CustomThemeProviderProps) => (
+  <ThemeProvider theme={{ ...theme, ...props.theme }}>
+    {props.children}
+  </ThemeProvider>
 );
 
-export default Theme;
+export default CustomThemeProvider;
