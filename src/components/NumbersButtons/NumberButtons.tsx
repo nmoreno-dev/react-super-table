@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../Button/Button";
 import { NumberButtonsProps } from "../../types/NumberButtonsProps.types";
+import { StyledNumberButton } from "./NumberButton.elements";
 
 export const NumberButtons = ({
   numbers,
@@ -10,11 +11,14 @@ export const NumberButtons = ({
   return (
     <>
       {numbers.map((number, index) => {
+        const isTheButtonSelected = currentSelected === index;
+        console.log(isTheButtonSelected);
         return (
-          <Button
+          <StyledNumberButton
             label={(number + 1).toString()}
             onClick={() => onNumberClick(number)}
             key={index}
+            selected={isTheButtonSelected}
           />
         );
       })}
