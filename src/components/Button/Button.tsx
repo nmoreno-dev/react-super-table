@@ -12,7 +12,7 @@ export const Button = ({
   return (
     <StyledButton
       onClick={props.onClick}
-      className="site-button"
+      className={props.className}
       disabled={props.disabled}
     >
       {label}
