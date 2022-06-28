@@ -30,11 +30,11 @@ export const Pagination = <T extends object>({
     [PaginationOptionsEnum.simple]: (
       <>
         <Button
-          onclick={goPrevious}
+          onClick={goPrevious}
           label={"Previous"}
           disabled={thereIsNoPrevPage}
         />
-        <Button onclick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
       </>
     ),
     [PaginationOptionsEnum.numbers]: (
@@ -47,7 +47,7 @@ export const Pagination = <T extends object>({
     [PaginationOptionsEnum.simple_numbers]: (
       <>
         <Button
-          onclick={goPrevious}
+          onClick={goPrevious}
           label={"Previous"}
           disabled={thereIsNoPrevPage}
         />
@@ -56,34 +56,34 @@ export const Pagination = <T extends object>({
           currentSelected={currentPageIndex}
           onNumberClick={goToPage}
         />
-        <Button onclick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
       </>
     ),
     [PaginationOptionsEnum.full]: (
       <>
         <Button
-          onclick={goFirst}
+          onClick={goFirst}
           label={"First"}
           disabled={thereIsNoPrevPage}
         />
         <Button
-          onclick={goPrevious}
+          onClick={goPrevious}
           label={"Previous"}
           disabled={thereIsNoPrevPage}
         />
-        <Button onclick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
-        <Button onclick={goLast} label={"Last"} disabled={thereIsNoPrevPage} />
+        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
+        <Button onClick={goLast} label={"Last"} disabled={thereIsNoPrevPage} />
       </>
     ),
     [PaginationOptionsEnum.full_numbers]: (
       <>
         <Button
-          onclick={goFirst}
+          onClick={goFirst}
           label={"First"}
           disabled={thereIsNoPrevPage}
         />
         <Button
-          onclick={goPrevious}
+          onClick={goPrevious}
           label={"Previous"}
           disabled={thereIsNoPrevPage}
         />
@@ -92,14 +92,14 @@ export const Pagination = <T extends object>({
           currentSelected={currentPageIndex}
           onNumberClick={goToPage}
         />
-        <Button onclick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
-        <Button onclick={goLast} label={"Last"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
+        <Button onClick={goLast} label={"Last"} disabled={thereIsNoNextPage} />
       </>
     ),
     [PaginationOptionsEnum.first_last_numbers]: (
       <>
         <Button
-          onclick={goFirst}
+          onClick={goFirst}
           label={"First"}
           disabled={thereIsNoPrevPage}
         />
@@ -108,7 +108,7 @@ export const Pagination = <T extends object>({
           currentSelected={currentPageIndex}
           onNumberClick={goToPage}
         />
-        <Button onclick={goLast} label={"Last"} disabled={thereIsNoPrevPage} />
+        <Button onClick={goLast} label={"Last"} disabled={thereIsNoPrevPage} />
       </>
     ),
   };
