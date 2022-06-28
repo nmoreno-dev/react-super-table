@@ -1,6 +1,7 @@
 import React from "react";
 import { useSuperTable } from "../../hooks/useSuperTable";
 import { FontStyle } from "../../styles/FontStyles";
+import CustomThemeProvider from "../../styles/Theme";
 import { PaginationOptionsEnum } from "../../types/Paginations.types";
 import { SuperTableProps } from "../../types/SuperTable.types";
 import { Pagination } from "../Pagination/Pagination";
@@ -35,7 +36,7 @@ export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
   console.log("SuperTable Render");
 
   return (
-    <>
+    <CustomThemeProvider>
       <FontStyle />
       <SuperTableContainer>
         <UpperControlBar
@@ -91,6 +92,6 @@ export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
           </div>
         </div>
       </SuperTableContainer>
-    </>
+    </CustomThemeProvider>
   );
 };
