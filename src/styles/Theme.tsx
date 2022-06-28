@@ -1,34 +1,19 @@
 import React from "react";
-import { ThemeProvider, ThemeProviderComponent } from "styled-components";
-
-type ThemeType = {
-  colors: {
-    primary?: string;
-    tableBanner?: string;
-    inPrimaryText?: string;
-    pagesNavButton?: string;
-    pagesNumberButton?: string;
-    pagesCurrentNumberButton?: string;
-    tableHeadersBackground?: string;
-    tableHeadersText?: string;
-    tableCellBackground?: string;
-    tableCellText?: string;
-  };
-};
+import { DefaultTheme, ThemeProvider } from "styled-components";
 
 interface CustomThemeProviderProps {
   children?: React.ReactNode;
-  theme?: ThemeType;
+  theme?: DefaultTheme;
 }
 
-const theme = {
+const theme: DefaultTheme = {
   colors: {
     primary: "#354a5f",
     tableBanner: "#354a5f",
     inPrimaryText: "#e9ebec",
-    pagesNavButton: "#354a5f",
-    pagesNumberButton: "#354a5f",
-    pagesCurrentNumberButton: "#3c73a9",
+    paginationNavButton: "#354a5f",
+    paginationNumberButton: "#354a5f",
+    paginationSelectedNumberButton: "#3c73a9",
     tableHeadersBackground: "#354a5f",
     tableHeadersText: "#e9ebec",
     tableCellBackground: "#ffffff",
