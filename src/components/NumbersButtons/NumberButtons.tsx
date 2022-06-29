@@ -11,8 +11,7 @@ export const NumberButtons = ({
   return (
     <>
       {numbers.map((number, index) => {
-        const isTheButtonSelected = currentSelected === index;
-        console.log(isTheButtonSelected);
+        const isTheButtonSelected = currentSelected === number;
         return (
           <StyledNumberButton
             label={(number + 1).toString()}
