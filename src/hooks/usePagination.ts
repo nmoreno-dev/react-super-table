@@ -5,40 +5,42 @@ export const usePagination = <T extends object>(
   pages: PaginationProps<T>['pages'],
   setCurrentPage: PaginationProps<T>['setCurrentPage']
 ) => {
-  const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
+  const currentPageIndex = useRef(0)
   const pagesIndices = useRef(Array.from(Array(pages.length).keys()));
   const [navegableIndices, setNavegableIndices] = useState<number[]>([]);
-  const canGoPrevious = useRef<boolean>(false);
-  const canGoNext = useRef<boolean>(false);
+  const shouldGoBackward = useRef<boolean>(false);
+  const shouldGoFordward = useRef<boolean>(false);
 
   const goFirst = () => {
-    setCurrentPageIndex(0);
+    if (!shouldGoBackward.current) return;
+    updateCurrentPage(0)
   };
 
   const goPrevious = () => {
-    if (!canGoPrevious.current) return;
-    setCurrentPageIndex(prev => prev - 1);
+    if (!shouldGoBackward.current) return;
+    updateCurrentPage(currentPageIndex.current - 1)
   };
 
   const goToPage = (pageIndex: number) => {
     const isValidIndex = pageIndex >= 0 && pageIndex < pages.length;
     if (!isValidIndex) return;
-    setCurrentPageIndex(pageIndex);
+    updateCurrentPage(pageIndex)
   };
 
   const goNext = () => {
-    if (!canGoNext.current) return;
-    setCurrentPageIndex(prev => prev + 1);
+    if (!shouldGoFordward.current) return;
+    updateCurrentPage(currentPageIndex.current + 1)
   };
 
   const goLast = () => {
-    setCurrentPageIndex(pages.length - 1);
+    if (!shouldGoFordward.current) return; 
+    updateCurrentPage(pages.length - 1)
   };
 
   const calculateNavegableIndices = () => {
     const subarr = [];
     for (let i = -2; i <= 2; i++) {
-      const idx = currentPageIndex + i;
+      const idx = currentPageIndex.current + i;
       if (idx >= 0 && idx < pages.length) {
         subarr.push(idx);
       }
@@ -46,24 +48,26 @@ export const usePagination = <T extends object>(
     setNavegableIndices(subarr);
   };
 
-  useEffect(() => {
-    setCurrentPage(currentPageIndex);
+  const updateCurrentPage = (newCurrent : number) => {
+    currentPageIndex.current = newCurrent;
+    shouldGoBackward.current = currentPageIndex.current > 0;
+    shouldGoFordward.current = currentPageIndex.current < pages.length - 1;
+    setCurrentPage(currentPageIndex.current);
     calculateNavegableIndices();
-  }, [currentPageIndex]);
+  }
 
   useEffect(() => {
-    setCurrentPageIndex(0);
+    currentPageIndex.current = 0;
     calculateNavegableIndices();
   }, [pages]);
 
   useEffect(() => {
-    canGoPrevious.current = currentPageIndex > 0;
-    canGoNext.current = currentPageIndex < pages.length - 1;
-  }, [pages, currentPageIndex]);
+    updateCurrentPage(0)
+  }, [pages]);
 
   return {
     pagesIndices: pagesIndices.current,
-    currentPageIndex,
+    currentPageIndex: currentPageIndex.current,
     navegableIndices,
     goFirst,
     goPrevious,
