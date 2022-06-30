@@ -1,5 +1,5 @@
-import React, { HTMLAttributes } from 'react';
-import 'styled-components';
+import React, { HTMLAttributes } from "react";
+import "styled-components";
 
 type BoxElement = {
   backgroundColor?: string;
@@ -23,7 +23,7 @@ type BoxElement = {
   gap?: string;
 };
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     colors: {
       primary?: string;
