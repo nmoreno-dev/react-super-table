@@ -13,11 +13,16 @@ const theme: DefaultTheme = {
     inPrimaryText: "#e9ebec",
     paginationNavButton: "#354a5f",
     paginationNumberButton: "#354a5f",
-    paginationSelectedNumberButton: "#3c73a9",
+    selectedPageButtonBackround: "#3c73a9",
+    selectedPageButtonText: "#e9ebec",
     tableHeadersBackground: "#354a5f",
     tableHeadersText: "#e9ebec",
     tableCellBackground: "#ffffff",
     tableCellText: "#000000",
+  },
+  paginationContainer: {
+    gap: "10px",
+    margin: "10px 0px 0px 0px",
   },
 };
 
