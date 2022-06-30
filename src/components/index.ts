@@ -1,1 +1,1 @@
-export {SuperTable} from './SuperTable';
+export { SuperTable } from "./SuperTable";

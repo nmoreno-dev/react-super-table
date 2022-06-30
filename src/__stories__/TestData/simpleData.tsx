@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Column } from "../../types/SuperTable.types";
 import { Row } from "./types";
 
