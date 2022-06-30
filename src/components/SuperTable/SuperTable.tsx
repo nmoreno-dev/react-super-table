@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useSuperTable } from "../../hooks/useSuperTable";
 import { FontStyle } from "../../styles/FontStyles";
@@ -14,7 +15,9 @@ import {
   SuperTableContainer,
 } from "./SuperTable.elements";
 
-export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
+export const SuperTable = <T extends Record<string, unknown>>(
+  props: SuperTableProps<T>
+) => {
   const { rows = [], columns } = props;
   const defaultTextAlign = props.textAling || "left";
 
@@ -78,18 +81,16 @@ export const SuperTable = <T extends Object>(props: SuperTableProps<T>) => {
             </tbody>
             {/* <tfoot></tfoot> */}
           </Table>
-          <div className="bottom-controls">
-            {currentRows.length <= 0 && <p>There's no data to show</p>}
-            {props.pagination && (
-              <Pagination
-                controlOption={
-                  props.paginationOption || PaginationOptionsEnum.simple
-                }
-                pages={pages}
-                setCurrentPage={handlePagination}
-              />
-            )}
-          </div>
+          {props.pagination && (
+            <Pagination
+              controlOption={
+                props.paginationOption || PaginationOptionsEnum.simple
+              }
+              pages={pages}
+              setCurrentPage={handlePagination}
+            />
+          )}
+          {currentRows.length <= 0 && <p>There&apos;s no data to show</p>}
         </div>
       </SuperTableContainer>
     </CustomThemeProvider>
