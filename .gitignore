@@ -1,3 +1,4 @@
 dist/
 node_modules/
 .npmrc
+react-super-table.code-workspace
