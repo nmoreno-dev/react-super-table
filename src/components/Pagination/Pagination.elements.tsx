@@ -1,7 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { CommonContainer } from "../StyledCommons.elements";
 
-export const PaginationContainer = styled.div`
-  margin: ${props => props.theme.paginationContainer?.margin || '10px 0px 0px 0px'};
+export const PaginationContainer = styled(CommonContainer)`
   display: flex;
-  gap: 10px;
 `;
