@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../Button/Button";
 import { NumberButtonsProps } from "../../types/NumberButtonsProps.types";
 import { StyledNumberButton } from "./NumberButton.elements";
 
