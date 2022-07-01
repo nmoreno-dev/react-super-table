@@ -29,7 +29,7 @@ export const Pagination = <T extends object>({
 
   const paginationControls = {
     [PaginationOptionsEnum.simple]: (
-      <PaginationContainer>
+      <PaginationContainer elementName="paginationContainer">
         <Button
           onClick={goPrevious}
           label={"Previous"}
@@ -46,7 +46,7 @@ export const Pagination = <T extends object>({
       />
     ),
     [PaginationOptionsEnum.simple_numbers]: (
-      <PaginationContainer>
+      <PaginationContainer elementName="paginationContainer">
         <Button
           onClick={goPrevious}
           label={"Previous"}
@@ -61,7 +61,7 @@ export const Pagination = <T extends object>({
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.full]: (
-      <PaginationContainer>
+      <PaginationContainer elementName="paginationContainer">
         <Button
           onClick={goFirst}
           label={"First"}
@@ -77,7 +77,7 @@ export const Pagination = <T extends object>({
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.full_numbers]: (
-      <PaginationContainer>
+      <PaginationContainer elementName="paginationContainer">
         <Button
           onClick={goFirst}
           label={"First"}
@@ -98,7 +98,7 @@ export const Pagination = <T extends object>({
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.first_last_numbers]: (
-      <PaginationContainer>
+      <PaginationContainer elementName="paginationContainer">
         <Button
           onClick={goFirst}
           label={"First"}
