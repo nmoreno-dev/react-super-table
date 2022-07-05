@@ -17,14 +17,14 @@ export const Pagination = <T extends object>({
     pagesIndices,
     currentPageIndex,
     navegableIndices,
+    canGoBackward,
+    canGoFordward,
     goFirst,
     goNext,
     goToPage,
     goPrevious,
     goLast,
   } = usePagination(pages, setCurrentPage);
-  const thereIsNoPrevPage = !(currentPageIndex > 0);
-  const thereIsNoNextPage = !(currentPageIndex < pagesIndices.length);
 
   const paginationControls = {
     [PaginationOptionsEnum.simple]: (
@@ -32,9 +32,9 @@ export const Pagination = <T extends object>({
         <Button
           onClick={goPrevious}
           label={"Previous"}
-          disabled={thereIsNoPrevPage}
+          disabled={canGoBackward}
         />
-        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={canGoFordward} />
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.numbers]: (
@@ -49,66 +49,54 @@ export const Pagination = <T extends object>({
         <Button
           onClick={goPrevious}
           label={"Previous"}
-          disabled={thereIsNoPrevPage}
+          disabled={canGoBackward}
         />
         <NumberButtons
           numbers={navegableIndices}
           currentSelected={currentPageIndex}
           onNumberClick={goToPage}
         />
-        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={canGoFordward} />
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.full]: (
       <PaginationContainer elementName="paginationContainer">
-        <Button
-          onClick={goFirst}
-          label={"First"}
-          disabled={thereIsNoPrevPage}
-        />
+        <Button onClick={goFirst} label={"First"} disabled={canGoBackward} />
         <Button
           onClick={goPrevious}
           label={"Previous"}
-          disabled={thereIsNoPrevPage}
+          disabled={canGoBackward}
         />
-        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
-        <Button onClick={goLast} label={"Last"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={canGoFordward} />
+        <Button onClick={goLast} label={"Last"} disabled={canGoFordward} />
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.full_numbers]: (
       <PaginationContainer elementName="paginationContainer">
-        <Button
-          onClick={goFirst}
-          label={"First"}
-          disabled={thereIsNoPrevPage}
-        />
+        <Button onClick={goFirst} label={"First"} disabled={canGoBackward} />
         <Button
           onClick={goPrevious}
           label={"Previous"}
-          disabled={thereIsNoPrevPage}
+          disabled={canGoBackward}
         />
         <NumberButtons
           numbers={navegableIndices}
           currentSelected={currentPageIndex}
           onNumberClick={goToPage}
         />
-        <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
-        <Button onClick={goLast} label={"Last"} disabled={thereIsNoNextPage} />
+        <Button onClick={goNext} label={"Next"} disabled={canGoFordward} />
+        <Button onClick={goLast} label={"Last"} disabled={canGoFordward} />
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.first_last_numbers]: (
       <PaginationContainer elementName="paginationContainer">
-        <Button
-          onClick={goFirst}
-          label={"First"}
-          disabled={thereIsNoPrevPage}
-        />
+        <Button onClick={goFirst} label={"First"} disabled={canGoBackward} />
         <NumberButtons
           numbers={navegableIndices}
           currentSelected={currentPageIndex}
           onNumberClick={goToPage}
         />
-        <Button onClick={goLast} label={"Last"} disabled={thereIsNoPrevPage} />
+        <Button onClick={goLast} label={"Last"} disabled={canGoBackward} />
       </PaginationContainer>
     ),
   };

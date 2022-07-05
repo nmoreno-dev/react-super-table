@@ -65,6 +65,8 @@ export const usePagination = <T extends object>(
     pagesIndices: pagesIndices.current,
     currentPageIndex: currentPageIndex.current,
     navegableIndices,
+    canGoBackward: canGoBackward.current,
+    canGoFordward: canGoFordward.current,
     goFirst,
     goPrevious,
     goToPage,
