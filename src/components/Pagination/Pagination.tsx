@@ -25,7 +25,6 @@ export const Pagination = <T extends object>({
   } = usePagination(pages, setCurrentPage);
   const thereIsNoPrevPage = !(currentPageIndex > 0);
   const thereIsNoNextPage = !(currentPageIndex < pagesIndices.length - 1);
-  console.log("render pagination");
 
   const paginationControls = {
     [PaginationOptionsEnum.simple]: (
