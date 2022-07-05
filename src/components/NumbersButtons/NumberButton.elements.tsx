@@ -10,4 +10,6 @@ export const StyledNumberButton = styled(Button)<StyledNumberButtonProps>`
     props.selected
       ? props.theme.colors.selectedPageButtonBackround
       : props.theme.colors.paginationNumberButton};
+  height: 30px;
+  width: 30px;
 `;

@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 export const StyledButton = styled.button`
   font-weight: bold;
-  padding: 5px;
   background-color: hsl(210, 29%, 29%);
   color: hsl(210, 9%, 92%);
   border: none;
   border-radius: 4px;
-  padding: 10px;
+  height: 30px;
   cursor: pointer;
 
   &:hover {
