@@ -24,7 +24,7 @@ export const Pagination = <T extends object>({
     goLast,
   } = usePagination(pages, setCurrentPage);
   const thereIsNoPrevPage = !(currentPageIndex > 0);
-  const thereIsNoNextPage = !(currentPageIndex < pagesIndices.length - 1);
+  const thereIsNoNextPage = !(currentPageIndex < pagesIndices.length);
 
   const paginationControls = {
     [PaginationOptionsEnum.simple]: (
@@ -72,7 +72,7 @@ export const Pagination = <T extends object>({
           disabled={thereIsNoPrevPage}
         />
         <Button onClick={goNext} label={"Next"} disabled={thereIsNoNextPage} />
-        <Button onClick={goLast} label={"Last"} disabled={thereIsNoPrevPage} />
+        <Button onClick={goLast} label={"Last"} disabled={thereIsNoNextPage} />
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.full_numbers]: (
