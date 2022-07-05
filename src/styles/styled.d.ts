@@ -12,7 +12,7 @@ type BoxElement = {
   padding?: string;
   paddingTop?: string;
   paddingRight?: string;
-  paddingBotton?: string;
+  paddingBottom?: string;
   paddingLeft?: string;
   border?: string;
   borderTop?: string;
