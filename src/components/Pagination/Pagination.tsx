@@ -39,11 +39,13 @@ export const Pagination = <T extends object>({
       </PaginationContainer>
     ),
     [PaginationOptionsEnum.numbers]: (
-      <NumberButtons
-        numbers={pagesIndices}
-        currentSelected={currentPageIndex}
-        onNumberClick={goToPage}
-      />
+      <PaginationContainer elementName="paginationContainer">
+        <NumberButtons
+          numbers={pagesIndices}
+          currentSelected={currentPageIndex}
+          onNumberClick={goToPage}
+        />
+      </PaginationContainer>
     ),
     [PaginationOptionsEnum.simple_numbers]: (
       <PaginationContainer elementName="paginationContainer">
