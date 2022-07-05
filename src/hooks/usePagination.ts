@@ -8,17 +8,15 @@ export const usePagination = <T extends object>(
   const currentPageIndex = useRef(0);
   const pagesIndices = useRef(Array.from(Array(pages.length).keys()));
   const [navegableIndices, setNavegableIndices] = useState<number[]>([]);
-  const shouldGoBackward = useRef<boolean>(false);
-  const shouldGoFordward = useRef<boolean>(false);
+  const canGoBackward = useRef<boolean>(false);
+  const canGoFordward = useRef<boolean>(false);
 
   const goFirst = () => {
-    if (!shouldGoBackward.current) return;
-    updateCurrentPage(0);
+    if (canGoBackward.current) updateCurrentPage(0);
   };
 
   const goPrevious = () => {
-    if (!shouldGoBackward.current) return;
-    updateCurrentPage(currentPageIndex.current - 1);
+    if (canGoBackward.current) updateCurrentPage(currentPageIndex.current - 1);
   };
 
   const goToPage = (pageIndex: number) => {
@@ -28,13 +26,11 @@ export const usePagination = <T extends object>(
   };
 
   const goNext = () => {
-    if (!shouldGoFordward.current) return;
-    updateCurrentPage(currentPageIndex.current + 1);
+    if (canGoFordward.current) updateCurrentPage(currentPageIndex.current + 1);
   };
 
   const goLast = () => {
-    if (!shouldGoFordward.current) return;
-    updateCurrentPage(pages.length - 1);
+    if (canGoFordward.current) updateCurrentPage(pages.length - 1);
   };
 
   const calculateNavegableIndices = () => {
@@ -50,8 +46,8 @@ export const usePagination = <T extends object>(
 
   const updateCurrentPage = (newCurrent: number) => {
     currentPageIndex.current = newCurrent;
-    shouldGoBackward.current = currentPageIndex.current > 0;
-    shouldGoFordward.current = currentPageIndex.current < pages.length - 1;
+    canGoBackward.current = currentPageIndex.current > 0;
+    canGoFordward.current = currentPageIndex.current < pages.length - 1;
     setCurrentPage(currentPageIndex.current);
     calculateNavegableIndices();
   };
