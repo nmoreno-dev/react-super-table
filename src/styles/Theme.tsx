@@ -21,8 +21,8 @@ const theme: DefaultTheme = {
     tableCellText: "#000000",
   },
   paginationContainer: {
-    gap: '10px',
-    marginTop: '10px',
+    gap: "10px",
+    marginTop: "10px",
   },
 };
 
